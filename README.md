@@ -41,12 +41,10 @@ To install and run the hospital management system, follow these steps:
 1. Clone the project repository
 2. Install Python 3.7 or higher and pip
 3. Install the required Python packages using the following command:
-* Copy code
 * pip install -r requirements.txt
 4. Create a MySQL database and import the SQL schema
 5. Update the database configuration settings in the # config.py file
 6. Run the server using the following command:
-* Copy code
 * python3 app.py
 7. Access the hospital management system by opening a web browser and navigating to http://localhost:5000
 
