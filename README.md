@@ -1,4 +1,4 @@
-# Project Proposal
+# The Hospital Hub Project
 
 # Overview
 This project aims to develop a hospital management system that will be integrated with other systems and a mobile app. The system will have modules for patients, staff, inventory, billing and payments, appointments, insurance, telehealth, and administrator hub.
