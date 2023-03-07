@@ -30,10 +30,10 @@ The hospital management system will be developed using the following technologie
 6. React JavaScript library
 
 # Project Timeline
-Week 1: Project setup and database design
-Week 1: Front-end development, back-end development, and integration testing
-Week 2: Web app development and user acceptance testing
-Week 2: Bug fixing, performance optimization and final deployment
+* Week 1: Project setup and database design
+* Week 1: Front-end development, back-end development, and integration testing
+* Week 2: Web app development and user acceptance testing
+* Week 2: Bug fixing, performance optimization and final deployment
 
 # Installation
 To install and run the hospital management system, follow these steps:
@@ -41,13 +41,13 @@ To install and run the hospital management system, follow these steps:
 1. Clone the project repository
 2. Install Python 3.7 or higher and pip
 3. Install the required Python packages using the following command:
-# Copy code
-# pip install -r requirements.txt
+* Copy code
+* pip install -r requirements.txt
 4. Create a MySQL database and import the SQL schema
 5. Update the database configuration settings in the # config.py file
 6. Run the server using the following command:
-#Copy code
-# python3 app.py
+* Copy code
+* python3 app.py
 7. Access the hospital management system by opening a web browser and navigating to http://localhost:5000
 
 # Conclusion
