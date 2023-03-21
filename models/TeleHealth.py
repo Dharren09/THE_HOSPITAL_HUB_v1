@@ -1,95 +1,45 @@
-from typing import List, Dict
-from parent_model import ParentModel
+#!/usr/bin/python3
+from models.patient import Patient
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+from models.parent_model import Base, ParentModel
 
 
-class TeleHealth(ParentModel):
+class TeleHealth(ParentModel, Base):
     """Class represents a telehealth session"""
-    def __init__(self, patient_id: str, staff_id: str, session_date: str,
-                 session_time: str, session_length: int, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.patient_id = patient_id
-        self.staff_id = staff_id
-        self.session_date = session_date
-        self.session_time = session_time
-        self.session_length = session_length
+    if models.storage_env == 'db':
+        __tablename__ = "telehealths"
 
-    def to_dict(self) -> Dict:
-        """Returns dictionary representation of object"""
-        attr = super().to_dict()
-        attr.update({
-            "patient_id": self.patient_id,
-            "staff_id": self.staff_id,
-            "session_date": self.session_date,
-            "session_time": self.session_time,
-            "session_length": self.session_length
-        })
-        return attr
+        patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True nullable=False)
+        duration = Column(Integer, nullable=False)
+        notes = Column(String(500))
+        start_time = Column(String(20), nullable=False)
+        end_time = Column(String(20), nullable=False)
+        duration = Column(Integer, nullable=False)
 
-    def __str__(self):
-        """Returns string representation of object"""
-        return f"[[{self.__class__.__name__}] ({self.id}) {self.to_dict()}]"
+        # Relationships
+        patient = relationship("Patient", back_populates="telehealths")
 
+    if models.storage_env != 'db':
+        @classmethod
+        def get_logs(cls, patient_id, start_date, end_date):
+            """Returns the telehealth logs of a patient in a given period"""
+            logs = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
+                                 start_date, cls.start_time < end_date).all()
+            return [{"start_time": l.start_time, "duration": l.duration, "provider_name": l.provider.name} 
+                    for l in logs]
 
-class TeleHealthSchedule(ParentModel):
-    """Class represents a scheduled telehealth session"""
-    def __init__(self, patient_id: str, staff_id: str, session_date: str,
-                 session_time: str, session_length: int, status: str = "pending",
-                 *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.patient_id = patient_id
-        self.staff_id = staff_id
-        self.session_date = session_date
-        self.session_time = session_time
-        self.session_length = session_length
-        self.status = status
-
-    def to_dict(self) -> Dict:
-        """Returns dictionary representation of object"""
-        attr = super().to_dict()
-        attr.update({
-            "patient_id": self.patient_id,
-            "staff_id": self.staff_id,
-            "session_date": self.session_date,
-            "session_time": self.session_time,
-            "session_length": self.session_length,
-            "status": self.status
-        })
-        return attr
-
-    def __str__(self):
-        """Returns string representation of object"""
-        return f"[[{self.__class__.__name__}] ({self.id}) {self.to_dict()}]"
-
-
-class TeleHealthLog(ParentModel):
-    """Class represents a log of telehealth sessions"""
-    def __init__(self, patient_id: str, staff_id: str, session_date: str,
-                 session_time: str, session_length: int, duration: int,
-                 call_quality: int, comments: str = "", *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.patient_id = patient_id
-        self.staff_id = staff_id
-        self.session_date = session_date
-        self.session_time = session_time
-        self.session_length = session_length
-        self.duration = duration
-        self.call_quality = call_quality
-        self.comments = comments
-
-    def to_dict(self) -> Dict:
-        """Returns dictionary representation of object"""
-        attr = super().to_dict()
-        attr.update({
-            "patient_id": self.patient_id,
-            "staff_id": self.staff_id,
-            "session_date": self.session_date,
-            "session_time": self.session_time,
-            "session_length": self.session_length,
-            "duration": self.duration,
-            "call_quality": self.call_quality,
-            "comments": self.comments
-        })
-        return attr
-
-    def __str__(self):
-        """Returns string"""
+        @classmethod
+        def get_schedule(cls, patient_id):
+            """Returns the telehealth schedule of a patient"""
+            now = datetime.utcnow()
+            schedule = []
+            for i in range(7):
+                start_date = now + timedelta(days=i)
+                end_date = start_date + timedelta(days=1)
+                telehealths = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
+                                            start_date, cls.start_time < end_date).all()
+                schedule.append({"date": start_date.strftime("%Y-%m-%d"), "telehealths": 
+                             [{"start_time": t.start_time, "provider_name": t.provider.name} for t in telehealths
+                                 })
+            return schedule

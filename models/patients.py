@@ -1,64 +1,62 @@
-from parent_model import ParentModel
-from datetime import date
+#!/usr/bin/python3
+from models.parent_model import ParentModel
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, ForeignKey, Text
+from sqlalchemy.orm import relationship
+from parent_model import ParentModel, Base
 
 
-class Patient(ParentModel):
+class Patient(ParentModel, Base):
     """
     Represents a patient in the hospital.
     """
+    if models.storage_ENV == 'db':
+    __tablename__ = 'patients'
 
-    def __init__(self, first_name, last_name, date_of_birth, gender, address, phone_number, email):
-        """
-        Initializes a new instance of the Patient class.
+    patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    age = Column(Integer, nullable=False)
+    address = Column(String(255), nullable=False)
+    phone_number = Column(String(20), nullable=False)
+    email = Column(String(255), nullable=False)
+    clinical_notes_summary = Column(Text, nullable=True)
+    gender = Column(String(10), nullable=False)
 
-        Args:
-            first_name (str): The patient's first name.
-            last_name (str): The patient's last name.
-            date_of_birth (date): The patient's date of birth.
-            gender (str): The patient's gender.
-            address (str): The patient's address.
-            phone_number (str): The patient's phone number.
-            email (str): The patient's email address.
-        """
-        super().__init__()
-        self.first_name = first_name
-        self.last_name = last_name
-        self.date_of_birth = date_of_birth
-        self.gender = gender
-        self.address = address
-        self.phone_number = phone_number
-        self.email = email
-        self.admission_date = None
-        self.discharge_date = None
-        self.treatment_summary = None
+    # Relationships
+    Billing_and_Invoice = relationship("billing_and_payment", backref="patient")
+    telehealths = relationship("TeleHealth", backref="patient")
 
-    def admit(self):
-        """
-        Admits the patient to the hospital.
-        """
-        self.admission_date = date.today()
+    if models.storage_ENV != 'db':
+        
+        @classmethod
+        def get_patient_bill(model):
+            """Retrieves the bill of a patient"""
+            total_amount = 0
+            items = []
+            for billing in self.billings:
+                total_amount += billing.amount
+                items.append(billing.to_dict())
+            return {"total_amount": total_amount, "items": items}
+        
+        @classmethod
+        def get_schedule(model, patient_id):
+            """Returns the telehealth schedule of a patient"""
+            now = datetime.utcnow()
+            schedule = []
+            for i in range(7):
+                start_date = now + timedelta(days=i)
+                end_date = start_date + timedelta(days=1)
+                telehealths = model.query.filter(model.patient_id == patient_id, model.start_time >= 
+                                             start_date, model.start_time < end_date).all()
+            if telehealths:
+                schedule.append({"date": start_date.strftime("%Y-%m-%d"), 
+                                 "telehealths": [{"start_time": t.start_time, "provider_name": t.provider.name} 
+                                     for t in telehealths]
 
-    def discharge(self):
-        """
-        Discharges the patient from the hospital.
-        """
-        self.discharge_date = date.today()
-
-    def update_treatment_summary(self, summary):
-        """
-        Updates the patient's treatment summary.
-
-        Args:
-            summary (str): The updated treatment summary.
-        """
-        self.treatment_summary = summary
-
-    def __str__(self):
-        """
-        Returns a string representation of the Patient object.
-        """
-        return f"Patient: {self.first_name} {self.last_name}, DOB: {self.date_of_birth}, Gender: {self.gender}, " \
-               f"Address: {self.address}, Phone: {self.phone_number}, Email: {self.email}, " \
-               f"Admitted: {self.admission_date}, Discharged: {self.discharge_date}, " \
-               f"Treatment Summary: {self.treatment_summary}"
-
+        @classmethod
+        def get_logs(model, patient_id, start_date, end_date):
+        """Returns the telehealth logs of a patient in a given period"""
+        logs = model.query.filter(model.patient_id == patient_id, model.start_time >= 
+                                 start_date, model.start_time < end_date).all()
+        return [{"start_time": l.start_time, "duration": l.duration, "provider_name": l.provider.name} 
+                 for l in logs]       
