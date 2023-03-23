@@ -1,54 +1,56 @@
-#!/usr/bin?python3
-""" tests my console application """
-import io
-import sys
 import unittest
+from io import StringIO
+import sys
 from console import THE_HOSPITAL_HUBCommand
 
 
-class TestTHE_HOSPITAL_HUBCommand(unittest.TestCase):
-
+class TestConsole(unittest.TestCase):
     def setUp(self):
-        """Create a THE_HOSPITAL_HUB command interpreter before each test"""
+        """Set up the console before each test"""
         self.console = THE_HOSPITAL_HUBCommand()
+        self.held, sys.stdout = sys.stdout, StringIO()
 
     def tearDown(self):
-        """Clean up the THE_HOSPITAL_HUB command interpreter after each test"""
-        del self.console
+        """Clean up the console after each test"""
+        sys.stdout = self.held
+
+    def test_create(self):
+        """Test the create command"""
+        self.console.onecmd("create Patient name='John Doe' age=25 gender='Male'")
+        output = sys.stdout.getvalue().strip()
+        self.assertEqual(output, "Patient.create(1)")
 
     def test_show(self):
         """Test the show command"""
-        # Redirect stdout to a buffer to capture output
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-        # Call the show command with a valid class name and id
-        self.console.onecmd("show Patient 123")
-        # Reset stdout
-        sys.stdout = sys.__stdout__
-        # Check the output
-        expected_output = "string representation of Patient instance with id 123\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+        self.console.onecmd("create Patient name='John Doe' age=25 gender='Male'")
+        self.console.onecmd("show Patient 1")
+        output = sys.stdout.getvalue().strip()
+        self.assertTrue("John Doe" in output)
+        self.assertTrue("25" in output)
+        self.assertTrue("Male" in output)
 
-        # Call the show command with a missing class name
-        self.console.onecmd("show")
-        expected_output = "** class name missing **\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+    def test_do_update(self):
+        """Test the do_update command"""
+        self.console.onecmd("create Patient name='John Doe' age=25 gender='Male'")
+        self.console.onecmd("update Patient 1 name 'Jane Doe'")
+        self.console.onecmd("show Patient 1")
+        output = sys.stdout.getvalue().strip()
+        self.assertTrue("Jane Doe" in output)
 
-        # Call the show command with a non-existent class name
-        self.console.onecmd("show Foo 123")
-        expected_output = "** class doesn't exist **\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+    def test_do_all(self):
+        """Test the do_all command"""
+        self.console.onecmd("create Patient name='John Doe' age=25 gender='Male'")
+        self.console.onecmd("create Patient name='Jane Doe' age=30 gender='Female'")
+        self.console.onecmd("create Doctor name='Dr. Smith' specialty='Cardiology'")
+        self.console.onecmd("all")
+        output = sys.stdout.getvalue().strip()
+        self.assertTrue("John Doe" in output)
+        self.assertTrue("Jane Doe" in output)
+        self.assertTrue("Dr. Smith" in output)
+        self.assertTrue("Cardiology" in output)
+        self.assertTrue("Patient" in output)
+        self.assertTrue("Doctor" in output)
 
-        # Call the show command with a missing id
-        self.console.onecmd("show Patient")
-        expected_output = "** instance id missing **\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
-
-        # Call the show command with a non-existent id
-        self.console.onecmd("show Patient 999")
-        expected_output = "** no instance found **\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
 
 if __name__ == '__main__':
     unittest.main()
-

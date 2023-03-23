@@ -1,50 +1,53 @@
-#!/usr/bin/python3
-
 import unittest
-from datetime import datetime
-from models.TeleHealth import TeleHealth
+from datetime import datetime, timedelta
+from models.patients import Patient
+from models.Telehealth import TeleHealth
 
 
 class TestTeleHealth(unittest.TestCase):
-    def setUp(self):
-        self.session = TeleHealth(
-            patient_id="12345",
-            staff_id="67890",
-            session_date="2023-03-11",
-            session_time="16:00:00",
-            session_length=40
-        )
+
+    def test_subclass(self):
+        self.assertTrue(issubclass(TeleHealth, ParentModel))
+        self.assertTrue(issubclass(TeleHealth, Base))
 
     def test_attributes(self):
-        self.assertTrue(hasattr(self.session, "id"))
-        self.assertIsInstance(self.session.id, str)
-        self.assertTrue(hasattr(self.session, "created_at"))
-        self.assertIsInstance(self.session.created_at, datetime)
-        self.assertTrue(hasattr(self.session, "updated_at"))
-        self.assertIsInstance(self.session.updated_at, datetime)
-        self.assertEqual(self.session.patient_id, "12345")
-        self.assertEqual(self.session.staff_id, "67890")
-        self.assertEqual(self.session.session_date, "2023-03-11")
-        self.assertEqual(self.session.session_time, "16:00:00")
-        self.assertEqual(self.session.session_length, 40)
+        self.assertTrue(hasattr(TeleHealth, 'patient_id'))
+        self.assertTrue(hasattr(TeleHealth, 'duration'))
+        self.assertTrue(hasattr(TeleHealth, 'notes'))
+        self.assertTrue(hasattr(TeleHealth, 'start_time'))
+        self.assertTrue(hasattr(TeleHealth, 'end_time'))
 
-    def test_to_dict(self):
-        expected_dict = {
-            "id": self.session.id,
-            "created_at": self.session.created_at.isoformat(),
-            "updated_at": self.session.updated_at.isoformat(),
-            "__class__": "TeleHealth",
-            "patient_id": "12345",
-            "staff_id": "67890",
-            "session_date": "2023-03-11",
-            "session_time": "16:00:00",
-            "session_length": 40
-        }
-        self.assertDictEqual(self.session.to_dict(), expected_dict)
+    def test_relationship(self):
+        self.assertTrue(hasattr(TeleHealth, 'patient'))
+        self.assertEqual(TeleHealth.patient.property.mapper.class_, Patient)
 
-    def test_str(self):
-        expected_str = "[[TeleHealth] ({}) {}]".format(self.session.id, self.session.to_dict())
-        self.assertEqual(str(self.session), expected_str)
+    def test_get_logs(self):
+        logs = TeleHealth.get_logs(patient_id='1', start_date='2022-01-01', end_date='2022-01-07')
+        expected_logs = [
+            {
+                "start_time": "2022-01-02 14:30:00",
+                "duration": 30,
+                "provider_name": "Dr. Smith"
+            },
+            {
+                "start_time": "2022-01-03 10:00:00",
+                "duration": 60,
+                "provider_name": "Dr. Johnson"
+            }
+        ]
+        self.assertListEqual(logs, expected_logs)
+
+    def test_get_schedule(self):
+        schedule = TeleHealth.get_schedule(patient_id='1')
+        expected_schedule = [
+            {
+                "date": (datetime.utcnow() + timedelta(days=i)).strftime("%Y-%m-%d"),
+                "telehealths": [
+                    {"start_time": "2022-01-02 14:30:00"}
+                ]
+            } for i in range(7)
+        ]
+        self.assertListEqual(schedule, expected_schedule)
 
 
 if __name__ == '__main__':
