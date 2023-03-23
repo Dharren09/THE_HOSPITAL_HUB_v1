@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-from models.parent_model import ParentModel
+from models.parent_model import ParentModel, Base
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship
+import models
 
 
 class Staff(ParentModel, Base):
     """Represents a staff member"""
-    if models.storage_env == 'db':
+    if models.storage_ENV == 'db':
         __tablename__ = "staffs"
 
         name = Column(String(100), nullable=False)
@@ -24,7 +25,7 @@ class Staff(ParentModel, Base):
         # Relationship
         TeleHealth = relationship("TeleHealth", back_populates="staffs")
 
-    if models.storage_env != 'db':
+    if models.storage_ENV != 'db':
         @classmethod
         def get_by_id(cls, staff_id):
             """
@@ -33,7 +34,7 @@ class Staff(ParentModel, Base):
             return cls.query.filter_by(staff_id=staff_id).first()
 
         @classmethod
-            def count(cls):
+        def count(cls):
             """
             Count the number of staff members
             """

@@ -5,17 +5,17 @@ from sqlalchemy.orm import relationship
 from models.parent_model import ParentModel, Base
 
 
-Class Pharmacy(ParentModel, Base):
+class Pharmacy(ParentModel, Base):
     """ Represents the pharmacy """
     if models.storage_ENV == 'db':
         __tablename__ = 'Pharmacy'
 
         patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True, nullable=False)
-        medicine_name = {string(100), nullable=False)
-        batch_number = (integer, nullable=False)
-        expiry_date = (integer, nullable=False)
-        quantity = (integer, nullable=False)
-        price = (integer, nullable=False)
+        name = Column(String(100), nullable=False)
+        batch_number = Column(integer, nullable=False)
+        expiry_date = Column(integer, nullable=False)
+        quantity = Column(integer, nullable=False)
+        price = Column(integer, nullable=False)
 
         # Relationships
         telehealths = relationship("TeleHealth", back_populates="pharmacy")

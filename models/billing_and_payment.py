@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-from typing import Dict, List
 from datetime import datetime
-from models.patient import Patient
+from models.patients import Patient
 from models.parent_model import ParentModel, Base
 from sqlalchemy import Column, Integer, String, Table, ForeignKey, Float
+import models
 
 
 

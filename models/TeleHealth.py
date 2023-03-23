@@ -1,16 +1,17 @@
 #!/usr/bin/python3
-from models.patient import Patient
+from models.patients import Patient
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from models.parent_model import Base, ParentModel
+import models
 
 
 class TeleHealth(ParentModel, Base):
     """Class represents a telehealth session"""
-    if models.storage_env == 'db':
+    if models.storage_ENV == 'db':
         __tablename__ = "telehealths"
 
-        patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True nullable=False)
+        patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True, nullable=False)
         duration = Column(Integer, nullable=False)
         notes = Column(String(500))
         start_time = Column(String(20), nullable=False)
@@ -20,7 +21,7 @@ class TeleHealth(ParentModel, Base):
         # Relationships
         patient = relationship("Patient", back_populates="telehealths")
 
-    if models.storage_env != 'db':
+    if models.storage_ENV != 'db':
         @classmethod
         def get_logs(cls, patient_id, start_date, end_date):
             """Returns the telehealth logs of a patient in a given period"""
@@ -40,6 +41,6 @@ class TeleHealth(ParentModel, Base):
                 telehealths = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
                                             start_date, cls.start_time < end_date).all()
                 schedule.append({"date": start_date.strftime("%Y-%m-%d"), "telehealths": 
-                             [{"start_time": t.start_time, "provider_name": t.provider.name} for t in telehealths
+                                [{"start_time": t.start_time} for t in telehealths]
                                  })
             return schedule
