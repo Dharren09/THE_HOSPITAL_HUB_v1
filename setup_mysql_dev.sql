@@ -1,7 +1,7 @@
 -- Prepares a MySQL Development Server for the project
 -- Database TheHospitalHub_dev_db
 -- User hbnb_dev with password thehospitalhub
--- Grants all privileges for hub_dev on TheHospitalHub_dev_db
+-- Grants all privileges for TheHospitalHub_dev on TheHospitalHub_dev_db
 -- Grants SELECT privileges for TheHospitalHub_dev on performance schema
 
 CREATE DATABASE IF NOT EXISTS TheHospitalHub_dev_db;
