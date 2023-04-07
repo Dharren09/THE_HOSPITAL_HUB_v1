@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/login_page.css">
+    </head>
+    <body>
+        <div class="card">
+            <div class="card-header">
+                <h1>THE <span style="color: #414375">HOSPITAL</span> <span style="color: #969CBA;">HUB</span></h1>
+                <div class="card-logo" background-color="white">
+                    <img src="../images/THE HOSPITAL HUB LOGO.png" alt="Card-Logo" width="230" height="230">
+                </div>
+            </div>  
+            <h2>Sign-in with Carewell Medical Centre</h2>
+            <form action="#" method="post">
+            <br>
+            <input type="text" id="email" name="email" placeholder="Username" required>
+            <br>
+            <br>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <br>
+            <label for="remember-me"> Always Remember-me</label>
+            <input type="checkbox" id="Always Remember-me" name="Always remember-me" value="true">
+            <br>
+            <form action="#" method="post">
+                <script src="../scripts/login_button.js"></script>
+                <button type="submit" id="submit-btn">Sign-in as</button>
+                <input type="hidden" id="usertype" name="usertype">
+                <select id="usertype" name="usertype">
+                    <option value="doctor">Doctor</option>
+                    <option value="nurse">Nurse</option>
+                    <option value="patient">Patient</option>
+                    <option value="pharmacist">Pharmacist</option>
+                    <option value="radiologist">Radiologist</option>
+                    <option value="administrator">Administrator</option>
+                    <option value="Midwife">Midwife</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Lab Tech">Lab Tech</option>
+                  </select>          
+                </div>   
+              </form>
+            <br>
+        </form>
+        <p>Don't have an account? <a href="../templates/signup_form.html"><strong>Sign up</strong></a></p>
+    </div>
+</body>
+</html>

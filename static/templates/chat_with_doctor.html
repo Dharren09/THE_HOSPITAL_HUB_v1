@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/chat_with_doctor.css">
+</head>
+<body>
+    <div class="card">
+        <div card="card-header">
+            <h1>Create Chat</h1>
+        </div>
+            <?php
+            require '../scripts/zoom-credentials.php';
+            ?>
+            <div class="chat-form">
+                <form action="https://zoom.us/join/" method="get" target="_blank">
+                    <div class="form-group">
+                        <label for="doctor-name">Doctor Name:</label>
+                        <select class="doctor">
+                            <option value="Dr. Truth Elior">Dr. Truth Elior</option>
+                            <option value="Dr. Renish">Dr. Renish</option>
+                            <option value="Dr. Ndawula">Dr. Ndawula</option>
+                            <option value="Dr. Melanie">Dr. Melanie</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="zoom-id">Zoom ID:</label>
+                        <input type="text" id="zoom-id" name="id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zoom-password">Zoom Password:</label>
+                        <input type="text" id="zoom-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="join-zoom-meeting" value="Join Zoom Meeting">
+                    </div>
+                </form>
+            </div>
+    </div>
+</body>
+</html>

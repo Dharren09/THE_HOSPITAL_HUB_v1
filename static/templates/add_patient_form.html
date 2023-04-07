@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Patient Medical Report</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/add_patient_form.css">
+</head>
+<body>
+    <form action="#" method="post">
+        <div class="form-header">
+            <h1>Patient Medical Form</h1>
+        </div>
+        <label for="patient-name">Patient Name:</label>
+		<input type="text" id="patient-name" name="patient-name" value="Example: Dharren Pius" disabled>
+		
+		<label for="medical-notes">Medical Notes:</label>
+		<textarea id="medical-notes" name="medical-notes" rows="5" placeholder="Enter medical notes here"></textarea>
+		
+		<label for="lab-tests">Lab Tests:</label>
+		<textarea id="lab-tests" name="lab-tests" rows="5" placeholder="Enter lab tests here"></textarea>
+		
+		<label for="diagnosis">Diagnosis:</label>
+		<textarea id="diagnosis" name="diagnosis" rows="5" placeholder="Enter diagnosis here"></textarea>
+		
+		<label for="prescription">Prescription:</label>
+		<textarea id="prescription" name="prescription" rows="5" placeholder="Enter prescription here"></textarea>
+		
+		<label for="doctor">Doctor:</label>
+		<select class="doctor">
+			<option value="Dr. Smith">Dr. Truth Elior</option>
+			<option value="Dr. Johnson">Dr. Renish</option>
+			<option value="Dr. Lee">Dr. Ndawula</option>
+			<option value="Dr. Brown">Dr. Melanie</option>
+		</select>
+		
+		<label for="amount-billed">Amount Billed:</label>
+		<input type="text" id="amount-billed" name="amount-billed" placeholder="Enter amount billed">
+		
+		<label for="telehealth-activity">TeleHealth Activity:</label>
+		<div id="telehealth-activity">
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input type="date" value="2023-04-01"></td>
+                    <td><input type="time" value="10:00"></td>
+                    <td><select class="table">
+                          <option value="video">Video Call</option>
+                          <option value="phone">Phone Call</option>
+                        </select></td>
+                    <td><input type="number" value="30"> minutes</td>
+                    <td><button>Edit</button></td>
+                </tr>
+            </table>
+        </div>              
+    <input type="submit" value="Save">
+	</form>
+</body>
+</html>

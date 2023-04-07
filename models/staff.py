@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy import Column, String, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship
 import models
+from models.TeleHealth import TeleHealth
 
 
 class Staff(ParentModel, Base):
@@ -15,34 +16,33 @@ class Staff(ParentModel, Base):
         name = Column(String(100), nullable=False)
         job_title = Column(String(100), nullable=False)
         department = Column(String(100), nullable=False)
-        hire_date = Column(Date, nullable=False)
+        hire_date = Column(Date, nullable=True)
         email = Column(String(100), nullable=False)
         phone_number = Column(String(20), nullable=False)
         address = Column(String(200), nullable=False)
         role = Column(String(100), nullable=False)
-        staff_id = Column(String(36), primary_key("staff.id"), nullable=False)
         
         # Relationship
-        TeleHealth = relationship("TeleHealth", back_populates="staffs")
+        TeleHealth = relationship("TeleHealth", back_populates="Staff")
 
     if models.storage_ENV != 'db':
         @classmethod
-        def get_by_id(cls, staff_id):
+        def get_by_id(model, self):
             """
             Retrieve a staff member by ID
             """
-            return cls.query.filter_by(staff_id=staff_id).first()
+            return model.query.filter_by(staff_id=self.id).first()
 
         @classmethod
-        def count(cls):
+        def count(model):
             """
             Count the number of staff members
             """
-            return cls.query.count()
+            return model.query.count()
 
         @classmethod
         def get_telehealth_activities(self):
             """
             Retrieve the telehealth activities of this staff member
             """
-            return TeleHealth.query.filter_by(staff_id=self.staff_id).all()
+            return TeleHealth.query.filter_by(staff_id=self.id).all()

@@ -4,22 +4,23 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from models.parent_model import Base, ParentModel
 import models
+from datetime import datetime, timedelta
 
 
 class TeleHealth(ParentModel, Base):
     """Class represents a telehealth session"""
     if models.storage_ENV == 'db':
-        __tablename__ = "telehealths"
+        __tablename__ = "Telehealth"
 
-        patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True, nullable=False)
+        id = Column(Integer, primary_key=True, autoincrement=True)
         duration = Column(Integer, nullable=False)
-        notes = Column(String(500))
+        notes = Column(String(500), nullable=True)
         start_time = Column(String(20), nullable=False)
         end_time = Column(String(20), nullable=False)
-        duration = Column(Integer, nullable=False)
 
         # Relationships
-        patient = relationship("Patient", back_populates="telehealths")
+        patient_id = Column(String(60), ForeignKey('patients.patient_id'), nullable=False)
+        patient = relationship("Patient", back_populates="Telehealth")
 
     if models.storage_ENV != 'db':
         @classmethod
@@ -27,8 +28,7 @@ class TeleHealth(ParentModel, Base):
             """Returns the telehealth logs of a patient in a given period"""
             logs = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
                                  start_date, cls.start_time < end_date).all()
-            return [{"start_time": l.start_time, "duration": l.duration, "provider_name": l.provider.name} 
-                    for l in logs]
+            return [{"start_time": l.start_time, "duration": l.duration} for l in logs]
 
         @classmethod
         def get_schedule(cls, patient_id):

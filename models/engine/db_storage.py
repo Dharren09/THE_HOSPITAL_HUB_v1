@@ -40,83 +40,65 @@ class DBStorage:
         if db_env == "test":
             Base.metadata.drop_all(self.__engine)
     
-    def create_session(self):
-        """ creates and returns a new session """
-        if self.__session is None:
-            self.__session = scoped_session(sessionmaker(bind=self.__engine))
-        return self.__session
-
-    def new(self, obj):
+    def create(self, obj):
+        """ creates and returns a new object """
         self.__session.add(obj)
 
     def save(self):
+        """ saves to database """
         self.__session.commit()
 
     def reload(self):
         """ Refreshes the session with the latest state of database """
-        self.__session.close()
-        Session = scoped_session(sessionmaker(bind=self.__engine))
+        Base.metadata.create_all(self.__engine)
+        Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
-    def create(self, model, **kwargs):
-        if model not in self.__classes:
-            raise ModelNotFoundError(model)
-        obj = self.__classes[model](**kwargs)
-        self.__session.add(obj)
-        self.__session.commit()
-        return obj
-
     def get(self, model, obj_id):
-        if model not in self.__classes:
-            raise ModelNotFoundError(model)
-        query = self.__session.query(self.__classes[model]).filter_by(id=obj_id)
-        obj = query.first()
-        if obj is None:
-            raise InstanceNotFoundError(obj_id, model)
-        return obj
+        for key in self.all(model).keys():
+            oid = key.split(".")[1]
+            if obj_id == oid:
+                obj = self.__session.query(__classes[model]).get(oid)
+                return obj
+        return None
 
-    def delete(self, model, obj_id):
-        if model not in self.__classes:
-            raise ModelNotFoundError(model)
-        obj = self.__session.query(self.__classes[model]).filter_by(id=obj_id).first()
-        if obj is None:
-            raise InstanceNotFoundError(obj_id, model)
+    def delete(self, obj):
         self.__session.delete(obj)
-        self.save()
+        self.__session.commit()
 
     def all(self, model=None):
         """ Return all objects in the storage """
-        objs = {}
         if model:
-            query = self.__session.query(self.__classes[model])
-            for obj in query.all():
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            objs = {}
+            class_objs = self.__session.query(__classes[model]).all()
+            for obj in class_objs:
+                key = obj.__class__.__name__ + "." + obj.id
                 objs[key] = obj
-        else:
-            for model in self.__classes:
-                query = self.__session.query(self.__classes[model])
-                for obj in query.all():
-                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                    objs[key] = obj
-        return objs
+            return objs
+
+        all_objects = {}
+
+        for model in __classes:
+            objs = self.__session.query(__classes[model]).all()
+            for obj in objs:
+                key = obj.__class__.__name__ + "." + obj.id
+                all_objects[key] = obj
+        return all_objects
 
     def count(self, model=None):
         if model:
-            return self.__session.query(model).count()
-        else:
-            count = 0
-            for model in self.__classes:
-                count += self.__session.query(model).count()
-            return count
+            return len(self.all(model))
+        return len(self.all())
 
-    def update(self, model, id, updates):
-        if model not in self.__classes:
-            raise ModelNotFoundError(model)
-        obj = self.__session.query(self.__classes[model]).filter_by(id=id).first()
-        if obj is None:
-            raise InstanceNotFoundError(id, model)
-        for field, value in updates.items():
-            if field not in ('id', 'created_at', 'updated_at'):
-                setattr(obj, field, value)
-        obj.updated_at = datetime.utcnow()
+    def update(self, key, **kwargs):
+        obj_id = key.split(".")[1]
+        class_name = key.split(".")[0]
+        obj = self.__session.query(__classes[class_name
+                                           ]).filter_by(id=obj_id).first()
+        for key, value in kwargs.items():
+            setattr(obj, key, value)
         self.__session.commit()
+
+    def close(self):
+        """Closes transaction"""
+        self.__session.close()

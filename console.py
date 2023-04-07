@@ -5,6 +5,8 @@ import cmd
 from datetime import datetime
 import models
 from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
+from colorama import init, Fore, Back, Style
 from models.parent_model import ParentModel
 from models.patients import Patient
 from models.pharmacy import Pharmacy
@@ -18,8 +20,8 @@ classes = {"Patient": Patient, "TeleHealth": TeleHealth, "Pharmacy": Pharmacy,
 
 
 class THE_HOSPITAL_HUBCommand(cmd.Cmd):
-    intro = "Welcome to THE_HOSPITAL_HUB console. Type help or ? to list commands.\n"
-    prompt = "(THE_HOSPITAL_HUB) "
+    
+    prompt = Style.BRIGHT + Fore.BLUE + "TheHospitalHub>>> " + Style.RESET_ALL
 
     def do_quit(self, arg):
         """Exit THE_HOSPITAL_HUB console."""
@@ -30,6 +32,14 @@ class THE_HOSPITAL_HUBCommand(cmd.Cmd):
         """Exit THE_HOSPITAL_HUB console when EOF is received."""
         print("Exiting THE_HOSPITAL_HUB console...")
         return True
+    
+    def preloop(self):
+        print(Style.BRIGHT + Fore.CYAN + "\nHello and Welcome to The Hospital Hub" +
+              Style.RESET_ALL + "  (default, February 12 2023, 08:01:47)")
+        print("\nStay on top of your health with our comprehensive health ", end="")
+        print("management system. Keep track of your medical history, appointments ", end="")
+        print("and health goals all in one place.\n")
+        print("Ver 1.0\n")
 
     def emptyline(self):
         """Do nothing when an empty line is entered."""
@@ -45,169 +55,168 @@ class THE_HOSPITAL_HUBCommand(cmd.Cmd):
             new_dict[key] = value
         return new_dict
 
-    def do_show(self, arg):
+    def do_count(self, args):
+        """Counts all objects"""
+        try:
+            if len(args) == 0:
+                print("The total number of objects in Storage is {}".
+                      format(len(models.storage.all())))
+                return
+            arguments = args.split(" ")
+            if len(arguments) == 1:
+                if arguments[0] in classes:
+                    obj_count = len(models.storage.all(arguments[0]))
+                    print("The total number of {}s within the TheHospitalHub "
+                          + "Hospital Management System is ".
+                          format(arguments[0]) + Fore.ORANGE
+                          + "{}".format(obj_count)
+                          + Style.RESET_ALL)
+                    return
+                else:
+                    print(Fore.RED + "Please enter a valid class" +
+                          Style.RESET_ALL)
+        except Exception:
+            pass
+
+    def do_show(self, args):
         """shows an individual object"""
-        # Split the arguments into a list
-        tokens = shlex.split(arg)
-        if len(tokens) < 2:
-            print("** class name and instance id missing **")
-            return
-        
-        # Creates variables of class name and id
-        class_name = tokens[0]
-        instance_id = tokens[1]
-
-        if len(tokens) > 2:
-            print("** too many arguments **")
-            return
-        
-        if not class_name:
-            print("** class name missing **")
-            return
-        
-        if class_name not in classes:
-            print("** class doesn't exist **")
-            return
-        
-        # if the instance id is missing
-        if not instance_id:
-            print("** instance id missing **")
-            return
-        
-        # Get the key for the instance from the class name and id
-        key = (classes[class_name]) + '.' + instance_id
+        arguments = args.split(" ")
         try:
-            print(models.storage.all()[key])
-        except KeyError:
-            print("** no instance found **")
-            return
+            if len(arguments) == 1:
+                for key in models.storage.all().keys():
+                    obj_id = key.split(".")[1]
+                    if arguments[0] == obj_id:
+                        class_name = key.split(".")[0]
+                        print(models.storage.get(class_name, obj_id).to_dict())
+        except Exception:
+            pass
 
-    def do_create(self, arg):
+    def do_create(self, args):
         """Creates a new instance, saves it to the JSON file then prints the id"""
-        tokens = shlex.split(arg)
-        if not tokens:
-            print("** class name missing **")
-            return
-        
-        class_name = tokens[0]
-        if class_name not in classes:
-             print("** class doesn't exist **")
-             return
-        
         try:
-            # create new instance of the class
-            new_instance = classes[class_name]()
-            # assuming a class has a method 'set_attr(name, value)'
-            for attr in tokens[1:]:
-                name, value = attr.split("=")
-                # convert the value to the appropriate data type
-                value = eval(value)
-                setattr(new_instance, name, value)
-            # Save the new instance and print its id
-            models.storage.new(new_instance)
-            models.storage.save()
-            print(new_instance.id)
-        except Exception as e:
-            print("** could not create instance: {}".format(str(e)))
+            if len(args) == 0:
+                print("Please enter Class Name to create Object")
+                return
+            arguments = args.split(" ")
 
-    def do_delete(self, arg):
+            if arguments[0] not in classes:
+                print("**Invalid Class**")
+                return
+
+            if len(arguments) == 1:
+                obj = eval(arguments[0])()
+                obj.save()
+                print(Fore.LIGHTBLUE_EX +
+                      f"Successfully created {obj.__class__.__name__}"
+                      +
+                      f" object: TheHospitalHu_id --  {obj.id}" + Style.RESET_ALL)
+                return
+            if len(arguments) > 1:
+                new_dict = {}
+                for entry in arguments[1:len(arguments)]:
+                    key = entry.split("=")[0]
+                    key = str(key)
+                    key = key.replace('"', "")
+                    key = key.replace("'", "")
+                    attr = entry.split("=")[1]
+
+                    if attr == "True" or attr == "False":
+                        attr = bool(attr)
+                    elif (attr[0] == '"'
+                          and attr[len(attr) - 1] == '"' or
+                          attr[0] == "'" and attr[len(attr) - 1] == "'"):
+                        attr = str(attr)
+                        attr = attr.replace('"', "")
+                        attr = attr.replace("'", "")
+                        attr = attr.replace("_", " ")
+                    else:
+                        try:
+                            attr = int(attr)
+                        except TypeError:
+                            print("Not an integer")
+                    new_dict.update({key: attr})
+                obj = eval(arguments[0])(**new_dict)
+                obj.save()
+                print(f"Successfully Created {obj.__class__.__name__} object: "
+                      + Fore.BLUE
+                      + f" TheHospitalHub_id --  {obj.id}"
+                      + Style.RESET_ALL)
+        except Exception:
+            pass
+
+
+    def do_delete(self, args):
         """Deletes an instance based on the class and id"""
-        tokens = shlex.split(arg)
-        
-        if not tokens:
-            print("** class name missing **")
-            return
-        class_name = tokens[0]
-        if class_name not in classes:
-            print("** class doesn't exist **")
-            return
-        
-        if len(tokens) < 2:
-            print("** instance id missing **")
-            return
-
-        instance_id = tokens[1]
-        key = "{}.{}".format(class_name, instance_id)
-
         try:
-            # get the instance from the storage object
-            instance = models.storage.all()[key]
-            # delete the instance from the storage object
-            del models.storage.all()[key]
-            # save the changes in JSON file
-            models.storage.save()
-        except KeyError:
-            print("** no instance found **")
-            return
+            arguments = args.split(" ")
+            if len(arguments) == 1:
+                cid = args
+                for key, value in models.storage.all().items():
+                    obj_id = key.split(".")[1]
+                    if cid == obj_id:
+                        models.storage.delete(value)
+                        print(Fore.RED + "Deleted" + Style.RESET_ALL)
+        except Exception:
+            pass
 
-    def do_update(self, arg):
+    def do_update(self, args):
         """Update an instance based on the class name, id, attribute & value"""
-        tokens = shlex.split(arg)
-        
-        if not tokens:
-            print("** class name missing **")
-            return
-        
-        class_name = tokens[0]
-        if class_name not in classes:
-            print("** class doesn't exist **")
-            return
-
-        if len(tokens) < 2:
-            print("** instance id missing **")
-            return
-
-        instance_id = tokens[1]
-        key = "{}.{}".format(class_name, instance_id)
-        
         try:
-            instance = models.storage.all()[key]
-        except KeyError:
-            print("** no instance found **")
-            return
+            arguments = args.split(" ")
+            if len(arguments) > 1:
+                new_dict = {}
+                for entry in arguments[1:len(arguments)]:
+                    key = entry.split("=")[0]
+                    key = str(key)
+                    key = key.replace('"', "")
+                    key = key.replace("'", "")
+                    attr = entry.split("=")[1]
 
-        if len(tokens) < 3:
-            print("** attribute name missing **")
-            return
-
-        attribute_name = tokens[2]
-        if not hasattr(instance, attribute_name):
-            print("** no attribute missing **")
-            return
-
-        if len(tokens) < 4:
-            print("** value missing **")
-            return
-
-        # converting the value to a correct type using eval method
+                    if attr == "True" or attr == "False":
+                        attr = bool(attr)
+                    elif (attr[0] == '"' and attr[len(attr) - 1] == '"'
+                          or attr[0] == "'" and attr[len(attr) - 1] == "'"):
+                        attr = str(attr)
+                        attr = attr.replace('"', "")
+                        attr = attr.replace("'", "")
+                        attr = attr.replace("_", " ")
+                    else:
+                        try:
+                            attr = int(attr)
+                        except TypeError:
+                            print("Not an integer")
+                    new_dict.update({key: attr})
+                cid = arguments[0]
+                for key in models.storage.all().keys():
+                    obj_id = key.split(".")[1]
+                    if cid == obj_id:
+                        models.storage.update(key, **new_dict)
+                        print(Fore.YELLOW + "Instance Updated"
+                              + Style.RESET_ALL)
+        except Exception:
+            pass
+    
+    def do_all(self, args):
+        """returns all objects in storage"""
         try:
-            value = eval(tokens[3])
-        except (NameError, SyntaxError):
-            value = tokens[3]
-
-        # update the attribute
-        setattr(instance, attribute_name, value)
-
-        # save the changes to the JSON file
-        models.storage.save()
-
-    def do_all(self, arg):
-        """ Prints all string representations of instances """
-        tokens = shlex.split(arg)
-
-        if tokens and tokens[0] not in classes:
-            print("** class doesn't exist **")
-            return
-
-        instance = models.storage.all()
-        if not tokens:
-            # print all instances
-            print([str(instance) for instance in instance.values()])
-        else:
-            # print instances of specific class
-            class_name = tokens[0]
-            print([str(instance) for instance in instance.values() if type(instance).__name__ == class_name])
-
+            if len(args) == 0:
+                all_objects = []
+                for key, value in models.storage.all().items():
+                    all_objects.append(str(value))
+                print(all_objects)
+                return
+            arguments = args.split(" ")
+            if len(arguments) == 1:
+                class_objects = []
+                if arguments[0] in classes:
+                    for value in models.storage.all(arguments[0]).values():
+                        class_objects.append(str(value))
+                    print(class_objects)
+                else:
+                    print(Fore.BLUE + "Please enter a valid class"
+                          + Style.RESET_ALL)
+        except Exception:
+            pass 
 
 
 if __name__ == '__main__':

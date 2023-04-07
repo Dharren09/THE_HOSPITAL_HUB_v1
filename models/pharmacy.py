@@ -3,6 +3,7 @@ import models
 from sqlalchemy import Column, String, Integer, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from models.parent_model import ParentModel, Base
+from models.patients import Patient
 
 
 class Pharmacy(ParentModel, Base):
@@ -10,24 +11,23 @@ class Pharmacy(ParentModel, Base):
     if models.storage_ENV == 'db':
         __tablename__ = 'Pharmacy'
 
-        patient_id = Column(String(60), ForeignKey('patient.id'), autoincrement=True, nullable=False)
         name = Column(String(100), nullable=False)
-        batch_number = Column(integer, nullable=False)
-        expiry_date = Column(integer, nullable=False)
-        quantity = Column(integer, nullable=False)
-        price = Column(integer, nullable=False)
+        batch_number = Column(Integer, nullable=False)
+        expiry_date = Column(Integer, nullable=False)
+        quantity = Column(Integer, nullable=False)
+        price = Column(Integer, nullable=False)
 
         # Relationships
-        telehealths = relationship("TeleHealth", back_populates="pharmacy")
-        billing_invoice = relationship("BillingInvoice", back_populates="pharmacy")
+        Telehealths = relationship("TeleHealth", back_populates="Pharmacy", cascade="all, delete")
+        Billings_and_Invoices = relationship("BillingInvoice", back_populates="Pharmacy", cascade="all, delete")
 
     @classmethod
-    def get_drugs_in_stock(model):
+    def get_drugs_in_stock(cls):
         """Retrieves all the drugs in stock"""
         return cls.query.filter(cls.quantity > 0).all()
 
     @classmethod
-    def get_expired_drugs(model):
+    def get_expired_drugs(cls):
         """Retrieves all expired drugs"""
         return cls.query.filter(cls.expiry_date < datetime.now()).all()
 
@@ -35,3 +35,4 @@ class Pharmacy(ParentModel, Base):
         """Retrieves all information of an individual drug"""
         return {"name": self.name, "batch_number": self.batch_number, "expiry_date": self.expiry_date,
                 "quantity": self.quantity, "price": self.price}
+

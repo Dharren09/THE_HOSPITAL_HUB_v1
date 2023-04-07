@@ -1,0 +1,95 @@
+.card-logo {
+    transform: translate(-170px, -135px);
+}
+
+.card-header {
+    background-color: transparent;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    font-family: 'times new roman';
+    transform: translate(20px, 250px);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #414375;
+  font-weight: bold;
+  transform: translate(-10px, -1px);
+}
+
+label {
+    color: navy;
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'Arial';
+    font-weight: 500;
+    transform: translate(-20px, 0px);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="checkbox"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  margin-top: -15px;
+  margin-left: -25px;
+  width: 350px;
+}
+select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: -10px;
+  margin-top: -15px;
+  margin-left: -25px;
+  width: 350px;
+}
+
+button[type="submit"] {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transform: translate(80px, -10px);
+  width: 170px;
+}
+
+button[type="submit"]:hover {
+  background-color: navy;
+}   
+
+p {
+  font-size: 16px;
+  margin-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translate(489px, 110px);
+}
+
+a {
+  color: #414375;
+}

@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transform: translate(300px, 25px);
+}
+
+.form-header {
+    background-color: white;
+    color: #0a2351;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1.5px solid #ccc;
+    transform: translate(0px, -30px);
+}
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: dimgray;
+}
+  
+  /* Style for the table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+  
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+  
+.select1 {
+    height: 10%;
+}
+  
+th {
+    background-color: white;
+    color: #0a2351;
+    font-family: Aclonica;
+    font-weight: lighter;
+    font-size: 1.4em;
+}
+  
+tr:nth-child(even) {
+    background-color: white;
+}
+  
+/* Style for the input fields */
+input[type=date], input[type=time], input[type=number] {
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+  
+select.doctor {
+    padding: 5px;
+    border-radius: 50px;
+    border: none;
+    background-color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    color: dimgray;
+}
+
+select.doctor:hover {
+    background-color: lightblue;
+}
+
+select.doctor:focus {
+    background-color: white;
+}
+
+select.doctor:active {
+    background-color: #0a2351;
+}
+
+select.table {
+    padding: 5px;
+    border-radius: 50px;
+    border: none;
+    background-color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    color: dimgray;
+    transform: translate(0px, 10px);
+    font-size: small;
+}
+  
+button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0a2351;
+    color: white;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: dimgray;
+}
+  
+input[type=submit] {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    color: white;
+    cursor: pointer;
+}
+  
+input[type=submit]:hover {
+    background-color: #3e8e41;
+}
+  
+form {
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    transform: translate(0px, -10px);
+    background-image: url(../images/THE\ HOSPITAL\ HUB\ LOGO-2.png);
+    background-position: center;
+    background-size: cover;
+}
+  
+form label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #0a2351;
+}
+  
+form input[type="text"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1.1em;
+}
+  
+form input[type="submit"] {
+    background-color: #0a2351;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 30%;
+}
+  
+form input[type="submit"]:hover {
+    background-color: dimgray;
+}
+  
+@media screen and (max-width: 600px) {
+    form {
+      width: 95%;
+      padding: 20px;
+    }
+}
