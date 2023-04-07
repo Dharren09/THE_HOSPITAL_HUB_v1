@@ -55,20 +55,22 @@ input[type="checkbox"] {
 }
 select {
   display: block;
-  width: 100%;
+  background-color: #0a2351;
+  color: white;
+  width: 40%;
   padding: 10px;
-  font-size: 16px;
-  border: 2px solid #ccc;
+  font-size: 12px;
+  border: 1px solid black;
   border-radius: 10px;
   box-sizing: border-box;
   margin-bottom: -10px;
   margin-top: -15px;
-  margin-left: -25px;
-  width: 350px;
+  margin-left: 80px;
+  width: 170px;
 }
 
 button[type="submit"] {
-  background-color: black;
+  background-color: #0a2351;
   color: white;
   padding: 10px 20px;
   border: none;

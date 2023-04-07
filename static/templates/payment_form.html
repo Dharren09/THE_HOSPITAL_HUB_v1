@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/payment_form.css">
+	<title>Payment Form</title>
+</head>
+<body>
+	<form>
+        <header>
+            <h1>Payment Form</h1>
+            <p>Please enter your payment details</p>
+        </header>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br>
+
+		<label for="last-name">Email:</label>
+		<input type="text" id="email" name="email" required><br>
+
+		<label for="phone">Phone Number:</label>
+		<div class="phone-number">
+			<select id="country-code" name="country-code" required>
+				<option value="">+256</option>
+                <option value="+256">+256 (Uganda)</option>
+                <option value="+254">+254 (Kenya)</option> 		
+                <option value="+1">+1 (United States)</option>
+				<option value="+44">+44 (United Kingdom)</option>
+				<option value="+234">+234 (Nigeria)</option>
+			</select>
+			<input type="tel" id="phone" name="phone" required>
+		</div><br>
+
+		<label for="address">Address:</label>
+		<textarea id="address" name="address" rows="4" cols="30" required></textarea><br>
+
+		<label for="reason">Reason for Payment:</label>
+		<select id="reason" name="reason" required>
+			<option value="">Select Reason for Payment</option>
+			<option value="Consultation Fee">Consultation Fee</option>
+			<option value="Medication">Medication</option>
+			<option value="Lab Tests">Lab Tests</option>
+			<option value="Medical Procedure">Medical Procedure</option>
+			<option value="Other">Other</option>
+		</select><br>
+
+		<label for="amount-billed">Amount Billed:</label>
+		<input type="number" id="amount-billed" name="amount-billed" min="0" step="0.01" required><br>
+
+		<label for="amount-paid">Amount Paid:</label>
+		<input type="number" id="amount-paid" name="amount-paid" min="0" step="0.01" required><br>
+
+		<label for="payment-method">Payment Method:</label>
+		<select id="payment-method" name="payment-method" required>
+			<option value="">Select Payment Method</option>
+			<option value="MTN Momo">MTN Momo</option>
+			<option value="Airtel Pay">Airtel Pay</option>
+			<option value="Visa">Visa</option>
+			<option value="Cash">Cash</option>
+			<option value="Cheque">Cheque</option>
+			<option value="HospitalHub Pay">HospitalHub Pay</option>
+		</select><br>
+
+		<label for="date">Date and Time of Payment:</label>
+		<input type="datetime-local" id="date" name="date" required><br>
+
+		<label for="insurance-id">Insurance ID:</label>
+		<input type="text" id="insurance-id" name="insurance-id"><br>
+
+		<label for="terms" class="accept-terms-label">By clicking the button, you accept the "HospitalHub Pay Terms, Conditions and Privacy"</label><br>
+			<input type="checkbox" id="terms-and-conditions" name="terms-and-conditions" required>
+		</label>
+
+		<button type="submit" id="<button type="submit">Proceed to Receipt</button>
+        <footer>
+            <img src="../images/THE HOSPITAL HUB LOGO.png" alt="Company Logo">
+            <p>Secure transactions by <span style="color: #0a2351; font-weight: bold; font-size: 1.5em;">HospitalHub-Pay</span></p>
+          </footer>
+      </form>
+    </body>
+  </html>
