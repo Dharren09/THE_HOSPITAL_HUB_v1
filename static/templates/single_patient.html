@@ -2,54 +2,206 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="../static/styles/header.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../styles/header.css"/>
 </head>
-<header>
-   <nav>
-    <div class="header-left">
-      <img src="../static/images/THE HOSPITAL HUB LOGO_edited.png" alt="Company Logo">
-      <div class="company-name">
-        <h2>THE</h2>
-        <h2>HOSPITAL</h2>
-        <h2>HUB</h2>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Header Card</title>
+  </head>
+  <body>
+    <div class="card">
+      <header>
+        <div class="search">
+          <input type="text" placeholder="Search...">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="header-right">
+          <div class="admin-image">
+            <img src="../images/dp pat 4(old).jpg" alt="admin-photo"
+          </div>
+          <div class="Admin"></div>
+          <h1>Admin</h1>
+          <p>Mubarak</p>  
+        </div>
+        <div class="patient-image">
+          <img src="../images/dp pat 1.jpg" alt="Dummy Photo">
+        </div>
+        <div class="settings-icon">
+          <img src="../images/settings.jpg" alt="Settings Icon">
+        </div>
+      </header>
     </div>
-   </nav>
-   <div class="search">
-    <button type="submit"><img src="../static/images/search.jpg" alt="Search Icon"></button>
-    <input type="text" placeholder="Search...">
-    <i class="fa fa-search"></i>
-  </div>
-  <div class="header-right">
-    <div class="Admin"></div>
-      <p>Admin</p>
-    </div>
-    <div class="patient-image">
-      <img src="../static/images/dp pat 1.jpg" alt="Dummy Photo">
-    </div>
-    <div class="settings-icon">
-      <img src="../static/images/settings.jpg" alt="Settings Icon">
-    </div>
-  </div>
-</header>
+  </body>
 
-<body>
-  <div class="sidebar">
-    <link rel="stylesheet" type="text/css" href="../static/styles/sidebar.css">
-    <div class="sidebar-header">
-      <img src="../static/styles/logo.png" alt="Logo">
-      <h3>Patient Dashboard</h3>
+  <body>
+      <div class="dashboard">
+        <img src="../images/THE HOSPITAL HUB LOGO_edited.png" alt="Company Logo">
+        <div class="company-name">
+          <h2>THE</h2>
+          <h2>HOSPITAL</h2>
+          <h2>HUB</h2>
+        </div>
+        <div>
+          <h3>Patient Dashboard</h3>
+          <ul class="dashboard-menu">
+            <li><a href="#"><img src="../images/appointment.jpg" alt="Schedule Icon">Schedule Appointment</a></li>
+            <li><a href="#"><img src="../images/medical report.jpg" alt="Medical Records Icon">Medical Records</a></li>
+            <li><a href="../templates/receipt.html"><img src="../images/payments.jpg" alt="Payments Icon">Payments</a></li>
+            <li><a href="#"><img src="../images/consultation.jpg" alt="Consultation Icon">Consultation</a></li>
+            <li><a href="#"><img src="../images/ambulance.jpg" alt="Ambulance Icon">Request Ambulance</a></li>
+            <li><a href="../templates/chat_with_doctor.html"><img src="../images/chat.jpg" alt="Chat Icon">Chat with Doctor</a></li>
+            <li><a href="../templates/add_patient_form.html"><img src="../images/update.jpg" alt="Profile Icon">Update Profile</a></li>
+            <li><a href="../templates/login_page.html"><img src="../images/log out.jpg" alt="Logout Icon">Log Out</a></li>
+          </ul>
+        </div>
+        <div class="footer">
+          <p>© 2023 The Hospital Hub. All rights reserved.</p>
+        </div>
+      </div> 
+  </body>
+  
+  <body>
+    <div class="card1">
+      <img src="../images/blood group.jpg" alt="card-image">
+      <h2>Blood Group</h2>
+      <p>O+</p>
+	  </div>
+	  <div class="card1">
+      <img src="../images/allergy.jpg" alt="card-image">
+		  <h2>Drug Allegies</h2>
+		  <p>Sulphur derivatives</p>
+	  </div>
+	  <div class="card1">
+      <img src="../images/recent admission.jpg" alt="card-image">
+      <h2>Recent Admission</h2>
+		  <p>01-02-2023</p>
+		  <p>ObGyn</p>
+	  </div>
+	  <div class="card2">
+      <img src="../images/occupation.jpg" alt="card-image1">
+		  <h2>Occupation</h2>
+		  <p>Software Engineer</p>
+	    </div>
+	  <div class="card2">
+      <img src="../images/medicine.jpg" alt="card-image2">
+		  <h2>On-medication</h2>
+		  <p>Pregnacare</p>
+		  <p>Calcivita</p>
+	    </div>
+	  <div class="card2">
+      <img src="../images/address.jpg" alt="card-image3">
+		  <h2>Address</h2>
+		  <p>Nairobi</p>
+		  <p>+254-708223342</p>
+	  </div>
+    <div class="card3">
+      <h2>Fevers</h2>
+      <p>325&deg;C</p>
     </div>
-    <ul class="sidebar-menu">
-      <li><a href="#"><img src="../static/images/appointment.jpg" alt="Schedule Icon">Schedule Appointment</a></li>
-      <li><a href="#"><img src="../static/images/medical report.jpg" alt="Medical Records Icon">Medical Records</a></li>
-      <li><a href="#"><img src="../static/images/payments.jpg" alt="Payments Icon">Payments</a></li>
-      <li><a href="#"><img src="../static/images/consultation.jpg" alt="Consultation Icon">Consultation</a></li>
-      <li><a href="#"><img src="../static/images/services.jpg" alt="Services Icon">Services</a></li>
-      <li><a href="#"><img src="../static/images/ambulance.jpg" alt="Ambulance Icon">Request Ambulance</a></li>
-      <li><a href="#"><img src="../static/images/chat.jpg" alt="Chat Icon">Chat with Doctor</a></li>
-      <li><a href="#"><img src="../static/images/update.jpg" alt="Profile Icon">Update Profile</a></li>
-      <li><a href="#"><img src="../static/images/log out.jpg" alt="Logout Icon">Log Out</a></li>
-    </ul>
-  </div>
-</body>
+    <div class="card3">
+      <h2>Dharren</h2>
+      <p>Doctor</p>
+    </div>
+    <div class="card4">
+      <h2>Bill</h2>
+      <p>250,000 UGX</p>
+    </div>
+    <div class="card4">
+      <h2>Blood Pressure</h2>
+      <p>74mmHg    Upper</p>
+      <p>124mmHg   Lower</p>
+    </div>
+    <div class="card5">
+      <h2>Calendar</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="time-picker">
+          <select name="hours">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <select name="minutes">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+          <select name="ampm">
+            <option value="am">AM</option>
+            <option value="pm">PM</option>
+          </select>
+        </div>
+    </div>
+  </body>
+</html>

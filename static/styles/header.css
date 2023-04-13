@@ -1,511 +1,380 @@
-  .head {
-    transform: translate(280px, 0);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: whitesmoke;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-    height: 80px;
-    padding: 0 32px;
-  }
-
-.search-container {
-	position: relative;
-  transform: translate(20px, 0);
+.card {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  width: 82%;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 2px;
+  transform: translate(290px, 0px);
 }
 
-.search-input {
-	box-sizing: border-box;
-	width: 300px;
-	padding: 10px 15px;
-	border: 1px solid navy;
-	border-radius: 50px;
-	font-size: 14px;
-  color: navy;
-	background-color: #fff;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid black;
 }
 
-.search-input:focus {
-	outline: none;
-	border-color: navy;
-	box-shadow: 0 0 10px #999;
+.search {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  border-radius: 25px;
+  padding: 5px;
+  height: 4%;
+  transform: translate(20px, -295px);
 }
 
-.search-icon {
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	transform: translateY(-50%);
-	height: 20px;
-	width: 20px;
-  color: navy;
+.search input[type="text"] {
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  width: 100%;
+  font-size: 13px;
 }
 
-.search-icon path {
-	fill: navy;
+.search button[type="submit"] {
+  border: none;
+  background-color: transparent;
+  padding: 2px;
+  transform: translate(0px, -10px);
 }
 
-/*
-.Admin {
-  margin-right: 10px;
+.search button[type="submit"]::before {
+  content: "\f002";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: transparent;
 }
-
-.patient-image {
-  font-weight: bold;
-  margin: 0;
-  color: #000;
-}
-
-.Admin-image img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.settings-icon img {
-  width: 30px;
-  height: 30px;
-  filter: invert(1);
-}  
-*/
 
 .header-right {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  transform: translate(550px, -275px);
 }
 
-.Admin {
-  transform: translate(200px, 0);
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: navy;
+.header-right h1 {
+  font-size: 15px;
+  font-weight: lighter;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0a2351;
 }
 
-p {
-  transform: translate(200px, 0);
-  margin: -10px 0;
-  text-align: center;
-  font-size: bold;
-  color: #444;
-  transform: translate(5, 5px);
-}
-
-p:last-of-type {
-  font-size: 1rem;
-  color: navy;
-}
-
-button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: navy;
-  display: inline-block;
-  font-size: 5px;
-  margin-top: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #3e8e41;
-}
-
-.patient-image {
-  transform: translate(-20px, 0);
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
+.admin-image img {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin: 0 10px;
+  margin-left: 10px;
+  transform: translate(-50px, 35px)
+}
+
+.header-right p {
+  font-size: 12px;
+  margin: 0;
 }
 
 .patient-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.settings-icon {
-  transform: translate(-250px, 0);
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-left: 10px;
+  transform: translate(150px, -35px);
 }
 
 .settings-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  transform: translate(210px, -75px);
 }
 
-/* sidebar */
-/* Body styles */
 body {
-  margin-top: 0px;
-  color: navy;
+  margin: 0;
   padding: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
 }
 
-/* Container styles */
-.container {
-  justify-content: left;
-  margin-top: 20px;
-  transform: translate(30px, -150px);
-}
-    
-.Logo {
-  width: 90px;
-  height: 90px;
-  transform: translate(-20px, 50px);
-}
-  
-.company-name {
+.dashboard {
   display: flex;
   flex-direction: column;
-  margin-left: 60px;
-  transform: translate(5px, -40px);
+  justify-content: center;
+  align-items: center;
+  width: 18%;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
-  
-.company-name h1 {
+
+.dashboard img {
+  width: 120px;
+  height: 120px;
+  margin-right: 10px;
+  transform: translate(-50px, 50px);
+}
+
+.company-name {
+  font-size: 13px;
+  font-weight: bold;
   font-family: ALGERIAN;
-  margin: 0;
-  font-size: 30px;
-  font-weight: 30px;
-  line-height: 24px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  transform: translate(40px, -80px);
   color: navy;
 }
 
-/* Sidebar styles */
-.sidebar {
-  width: 200px;
-  height: calc(100vh - 100px);
-  background-color: white; 
+.dashboard h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: black;
+  transform: translate(-10px, -130px);
 }
 
-/* Sidebar header styles */
-.sidebar-header {
-  text-align: left;
-  margin-bottom: 25px;
-  margin-top: -10%;
-}
-
-/* Sidebar menu styles */
-.sidebar-menu {
+.dashboard-menu {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  transform: translate(40px, -100px);
 }
 
-/* Sidebar menu item styles */
-.sidebar-menu li {
-  margin-bottom: 15px;
+.dashboard-menu li {
+  margin-bottom: 10px;
+  font: 100 12px/1.5 "Open Sans", sans-serif;
+  transform: translate(-50px, -50px);
+  padding: 0px;
+  border-color: #0a2351;
 }
 
-.sidebar-menu li a {
+.dashboard-menu a {
   display: flex;
-  align-items: centre;
-}
-
-.sidebar-menu li a:hover {
-  color: #000;
-}
-
-.sidebar-menu li img {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}  
-
-.sidebar {
-  position: relative;
-  width: 250px;
-  height: 100vh;
-  background-color: none;
-}
-
-.sidebar-content {
-  padding: 40px;
-}
-
-/* Add this CSS for the copyright statement */
-.sidebar .copyright {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  align-items: center;
+  color: #444;
+  text-decoration: none;
   padding: 10px;
-  background-color: none;
-  text-align: center;
-  font-size: 0.8rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-/* blood pressure styles */
-/*
+.dashboard-menu a:hover {
+  background-color: #eee;
+}
+
+.dashboard-menu img {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  transform: translate(0px, 0px);
+}
+
+.footer {
+  background-color: #0a2351;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Global styles */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.blood-pressure-container {
-  border: 1px solid white;
-  padding: 10px;
-  top: 1;
-  margin: 2px;
-  max-width: 600px;
-  position: absolute;
-  right: 0;
-  background-color: #999;
-  transform: translate(200, 0);
-}
-
-.blood-pressure-container h2 {
-  margin-top: 0;
-}
-
-.blood-pressure-container table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.blood-pressure-container th,
-.blood-pressure-container td {
-  text-align: center;
-  padding: 5px;
-  border: 1px solid #ccc;
-}
-
-.blood-pressure-container th {
-  background-color: #eee;
-}
-*/
-
-.container {
+  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-  position: absolute;
 }
 
-.patient-name {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  float: left;
-  transform: translate(280px, 5px);
-  color: navy;
-}
-
-/* card styles */
-.patient-details {
-  display: flex;
-  font-weight: bold;
-  transform: translate(70px, 305px);
-  font-size: large;
-  font-family: Arial, Helvetica, sans-serif;
-  color: navy;
-}
-.schedule-appointment {
-  display: flex;
-  font-weight: bold;
-  transform: translate(690px, 285px);
-  font-size: large;
-  font-family: Arial, Helvetica, sans-serif;
-  color: navy;
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .card1 {
-  display: flex;
-  flex-direction: column;
   width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(70px, 300px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+  height: 90px;
+  flex-direction: column;
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: inline-block;
+  transform: translate(-240px, 210px);
 }
 
-.card-icon1 {
-  margin-right: 1rem;
-}
-
-.card-icon1 img {
-  position: absolute;
-  transform: translate(-115px, 0px);
-  width: 50px;
-  height: 50px;
+.card1 img {
+  width: 20%;
+  height: 50%;
+  object-fit: cover;
+  transform: translate(10px, 20px);
   border-radius: 50%;
 }
 
-.card-content1 h2 {
-  font-size: 1.2rem;
-  transform: translate(30px, -20px);
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+.card1 p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  padding: 0 20px;
+  transform: translate(70px, -65px);
 }
 
-.card-content1 p {
-  font-size: 1.1rem;
+.card1 h2 {
+  font-size: 1rem;
   font-weight: bold;
-  color: dimgray;
-  transform: translate(30px, -10px);
+  padding: 0 30px;
+  transform: translate(60px, -50px);
 }
 
 .card2 {
-  display: flex;
-  flex-direction: column;
   width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(275px, 325px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+  height: 90px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: translate(50px, -180px);
+}
+
+.card2 h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0 30px;
+  transform: translate(70px, -70px);
+}
+
+.card2 img {
+  width: 23.5%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 50%;
+  transform: translate(10px, 10px);
+}
+
+.card2 p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  padding: 0 20px;
+  transform:  translate(80px, -80px);
 }
 
 .card3 {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(275px, 350px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+  width: 150px;
+  height: 50px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: inline-block;
+  transform: translate(300px, -700px);
 }
 
-.card4 {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(580px, 18px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+.card3 h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0 30px;
+  transform: translate(-10px, -10px);
+}
+
+.card3 p {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  padding: 0 20px;
+  transform: translate(0px, -20px);
 }
 
 .card5 {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(580px, 43px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+  width: 450px;
+  height: 250px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: translate(430px, -900px);
 }
 
-.card6 {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  height: 60px;
-  align-items: center;
-  padding: 1rem;
-  transform: translate(580px, 70px);
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px #ccc;
+.card4 {
+  width: 170px;
+  height: 80px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: inline-block;
+  transform: translate(500px, -880px);
 }
 
-.card-icon2 {
-  margin-right: 1rem;
-}
-
-.card-icon2 img {
-  position: absolute;
-  transform: translate(-115px, 0px);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.card-content2 h2 {
-  font-size: 1.2rem;
-  transform: translate(30px, -20px);
+.card4 h2 {
+  font-size: .9rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  padding: 0 30px;
+  transform: translate(-10px, -10px);
 }
 
-.card-content2 p {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: dimgray;
-  transform: translate(30px, -10px);
+.card4 p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  padding: 0 20px;
+  transform: translate(0px, -20px);
 }
 
-/* Calendar styles */
+.time-picker {
+  margin-top: 10px;
+}
+
 table {
-  border-collapse: collapse;
-  width: 30%;
-  transform: translate(900px, -265px);
-  background-color: olivedrab;
-  border: 1px solid #ccc;
-  border-radius: 10%;
-}
-
-th, td {
-  border: none;
-  padding: 8px;
-  text-align: center;
-  background-color: olivedrab;
+  margin-top: 20px;
+  width: 100%;
 }
 
 th {
-  background-color: olivedrab;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 td {
-  height: 34px;
+  text-align: center;
 }
 
-td:first-child {
-  background-color: olivedrab;
-}
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+  .card,
+  .card1,
+  .card2,
+  .card4 {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
 
-td:nth-child(6), td:nth-child(7) {
-  background-color: olivedrab;
-}
+  .card img,
+  .card1 img {
+    height: 40%;
+  }
 
-tr:last-child td:first-child {
-  font-weight: bold;
-  text-align: left;
-}
-
-tr:last-child td:last-child {
-  font-weight: bold;
-  text-align: right;
-}
-
-/* clock styles */
-.clock {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  font-size: 24px;
-  font-weight: bold;
-  padding: 10px;
+  .card2 {
+    width: 100%;
+  }
 }

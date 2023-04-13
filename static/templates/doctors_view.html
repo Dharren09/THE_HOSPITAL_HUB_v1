@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="../styles/doctors_view.css"/>
+</head>
+  <body>
+    <div class="card">
+      <header>
+        <div class="search">
+          <input type="text" placeholder="Search...">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="header-right">
+          <div class="admin-image">
+            <img src="../images/dp pat 4(old).jpg" alt="admin-photo">
+          </div>
+          <div class="Admin"></div>
+          <h1>Admin</h1>
+          <p>Mubarak</p>  
+        </div>
+        <div class="settings-icon">
+          <img src="../images/settings.jpg" alt="Settings Icon">
+        </div>
+      </header>
+    </div>
+    <div class="doctor-name">
+      <h7>Dr. Elior Truth</h7>
+    </div>
+    <div class="card8">
+      <div class="card8-header">
+        <h4>Today's Appointments</h4>
+      </div>
+      <div class="card8-body">
+        <div class="row">
+          <div class="col-sm-1">
+            <h4>10:00 AM</h4>
+          </div>
+          <div class="col-sm-10">
+            <div class="card5">
+              <img src="../images/dp pat 2.jpg" alt="Patient-Image1">
+              <h5 class="card5-title">Kisembo Ivan</h5>
+              <p class="card5-text"><strong style="color: navy;">Diagnosis:</strong> <span style="color: black;">Hypertension</span></p>
+              <a href="#" class="btn btn-secondary1"><i class="fas fa-ellipsis-h"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>11:30 AM</h4>
+          </div>
+          <div class="col-sm-11">
+            <div class="card5">
+              <img src="../images/dp pat 3.jpg" alt="Patient-Image1">
+              <h5 class="card5-title">Abdul Rauf</h5>
+              <p class="card5-text"><strong style="color: navy;">Diagnosis:</strong> <span style="color: black;">Migraine</span></p>
+              <a href="#" class="btn btn-secondary1"><i class="fas fa-ellipsis-h"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>2:00 PM</h4>
+          </div>
+          <div class="col-sm-12">
+            <div class="card5">
+              <img src="../images/dp pat 1.jpg" alt="Patient-Image1">
+              <h5 class="card5-title">Renish Okago</h5>
+              <p class="card5-text"><strong style="color: navy;">Diagnosis:</strong> <span style="color: black;">Pregnancy</span></p>
+              <a href="#" class="btn btn-secondary1"><i class="fas fa-ellipsis-h"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div class="card1">
+      <h3>Appointments</h3>
+      <p>76</p>
+    </div>
+    <div class="card6">
+      <h3>Reviewed Patients</h3>
+      <p>25</p>
+    </div>
+    <div class="card2">
+      <table>
+        <thead>
+          <tr>
+            <th>Add new patient</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="../templates/add_patient_form.html"><button><i class="fas fa-user-plus"></i></button></a></td>
+            <td><a href="../templates/add_patient_form.html"><button><i class="fas fa-edit"></i></button></a></td>
+            <td><a href="../templates/add_patient_form.html"><button><i class="fas fa-trash-alt"></i></button></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+    <div class="card4">
+      <h3>Patient Database</h3>
+      <table style="height: 300px; overflow-y: scroll;">
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Here, you can use a server-side script to populate the table with data from the patient database -->
+          <tr>
+            <td>1</td>
+            <td>Renish Okago</td>
+            <td>+254-705662442</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-info"><i class="fas fa-info"></i> Info</button>
+                <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i> History</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Payment</button>
+                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Abdul Rauf</td>
+            <td>+256-787592891</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-info"><i class="fas fa-info"></i> Info</button>
+                <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i> History</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Payment</button>
+                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Najib Mutyaba</td>
+            <td>+256-700155879</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-info"><i class="fas fa-info"></i> Info</button>
+                <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i> History</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Payment</button>
+                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Beatrice Zana</td>
+            <td>+265-994881134</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-info"><i class="fas fa-info"></i> Info</button>
+                <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i> History</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Payment</button>
+                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>          
+  </body>
+
+  <body>
+    <div class="dashboard">
+      <img src="../images/THE HOSPITAL HUB LOGO_edited.png" alt="Company Logo">
+      <div class="company-name">
+        <h2>THE</h2>
+        <h2>HOSPITAL</h2>
+        <h2>HUB</h2>
+      </div>
+      <div>
+        <h3>Doctor Dashboard</h3>
+        <ul class="dashboard-menu">
+          <li><a href="#"><img src="../images/appointment.jpg" alt="Schedule Icon">Appointments</a></li>
+          <li><a href="../templates/add_patient_form.html"><img src="../images/consultation.jpg" alt="Consultation Icon">Consultation</a></li>
+          <li><a href="../templates/chat_with_doctor.html"><img src="../images/chat.jpg" alt="Chat Icon">Chat with Patient</a></li>
+          <li><a href="../templates/messages.html"><img src="" alt="message icon">Messages</a></li>
+          <li><a href="#"><img src="../images/medicine.jpg" alt="pharmacy icon">Pharmacy</a></li>
+          <li><a href="../templates/login_page.html"><img src="../images/log out.jpg" alt="Logout Icon">Log Out</a></li>
+        </ul>
+      </div>
+      <div class="footer">
+        <p>© 2023 The Hospital Hub. All rights reserved.</p>
+      </div>
+    </div> 
+</body>
+

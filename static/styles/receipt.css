@@ -1,0 +1,132 @@
+/* set basic styles for the whole page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  /* set styles for the heading */
+  h2 {
+    text-align: center;
+    color: #0a2351;
+    border-bottom: 1px solid #0a2351;
+  }
+  
+  /* set styles for the form elements */
+  label {
+    display: inline-block;
+    width: 120px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"] {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus {
+    outline: none;
+    border-color: #4d90fe;
+  }
+  
+  /* set styles for the prescription table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  td[contenteditable="true"] {
+    background-color: #fff;
+  }
+  
+  /* set styles for the signature and issued by fields */
+  #signature,
+  #issued-by {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  #signature:focus,
+  #issued-by:focus {
+    outline: none;
+    border-color: #4d90fe;
+  }
+
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    color: #0a2351;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: translate(30px, 10px);
+  }
+
+  #share-email {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: none;
+    color: #0a2351;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: translate(170px, -28.5px);
+  }
+
+  #share-whatsapp {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: none;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    transform: translate(150px, -28.5px);
+  }
+
+  footer {
+    background-color: whitesmoke;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #0a2351;
+  }
+
+  footer p {
+    margin: 0;
+    color: black;
+    font-weight: bold;
+    transform: translate(390px, 15px);
+  }

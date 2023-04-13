@@ -1,0 +1,111 @@
+/* Style for the card container */
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 80%;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style for the appointment header */
+  .appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .appointment-header h2 {
+    margin: 0;
+  }
+  
+  .add-appointment-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-appointment-btn:hover {
+    background-color: #0069d9;
+  }
+  
+  /* Style for the appointment list */
+  .appointment-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style for each appointment */
+  .appointment-list li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+  }
+  
+  /* Style for patient info */
+  .patient-info {
+    margin-bottom: 10px;
+  }
+  
+  .patient-name {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .patient-email {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Style for appointment info */
+  .appointment-info {
+    margin-top: 10px;
+  }
+  
+  .appointment-reason {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .appointment-time {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .appointment-location {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Style for appointment links */
+  .appointment-links {
+    margin-top: 10px;
+  }
+  
+  .zoom-link {
+    background-color: #0a2351;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .zoom-link:hover {
+    background-color: #0069d9;
+  }
+  
+  .telehealth-id {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+  }  

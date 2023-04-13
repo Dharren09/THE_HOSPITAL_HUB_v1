@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/receipt.css">
+	<title>Receipt</title>
+</head>
+<body>
+    <h2>Receipt</h2>
+    <div class="print-receipt">
+        <button onclick="window.print()">Print Receipt</button>
+    </div>
+    <div id="share-email">
+        <a href="mailto:?subject=Receipt&body=Invoice%20Number:%20%0D%0A%0D%0AName:%20%0D%0A%0D%0AEmail:%20%0D%0A%0D%0APhone%20Number:%20%0D%0A%0D%0AAddress:%20%0D%0A%0D%0AReason%20for%20Payment:%20%0D%0A%0D%0AAmount%20Billed:%20%0D%0A%0D%0AInsurance%20ID:%20%0D%0A%0D%0AAmount%20Paid:%20%0D%0A%0D%0APayment%20Method:%20%0D%0A%0D%0APayment%20Date:%20%0D%0A%0D%0AAmount%20Due:%20%0D%0A%0D%0APrescription:%20Ibuprofen%20-%202%20-%20$20.00%20-%202024-04-01%0D%0A%0D%0A%0D%0ASignature:%20%0D%0A%0D%0AIssued%20By:%20">
+        Share via Email
+        </a>
+    </div>
+    <div id="share-whatsapp">
+        <a href="https://wa.me/?text=Receipt%0A%0AInvoice%20Number:%20%0D%0A%0D%0AName:%20%0D%0A%0D%0AEmail:%20%0D%0A%0D%0APhone%20Number:%20%0D%0A%0D%0AAddress:%20%0D%0A%0D%0AReason%20for%20Payment:%20%0D%0A%0D%0AAmount%20Billed:%20%0D%0A%0D%0AInsurance%20ID:%20%0D%0A%0D%0AAmount%20Paid:%20%0D%0A%0D%0APayment%20Method:%20%0D%0A%0D%0APayment%20Date:%20%0D%0A%0D%0AAmount%20Due:%20%0D%0A%0D%0APrescription:%20Ibuprofen%20-%202%20-%20$20.00%20-%202024-04-01%0D%0A%0D%0A%0D%0ASignature:%20%0D%0A%0D%0AIssued%20By:%20">
+        Share via WhatsApp
+        </a>
+    </div>      
+    <div>
+        <label for="invoice-number">Invoice Number:</label>
+        <input type="text" id="invoice-number" name="invoice-number">
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </div>
+    <div>
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone-number">
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+    </div>
+    <div>
+        <label for="reason">Reason for Payment:</label>
+        <input type="text" id="reason" name="reason">
+    </div>
+    <div>
+        <label for="amount-billed">Amount Billed:</label>
+        <input type="number" id="amount-billed" name="amount-billed">
+    </div>
+    <div>
+        <label for="insurance-id">Insurance ID:</label>
+        <input type="text" id="insurance-id" name="insurance-id">
+    </div>
+    <div>
+        <label for="amount-paid">Amount Paid:</label>
+        <input type="number" id="amount-paid" name="amount-paid">
+    </div>
+    <div>
+        <label for="payment-method">Payment Method:</label>
+        <input type="text" id="payment-method" name="payment-method">
+    </div>
+    <div>
+        <label for="payment-date">Payment Date:</label>
+        <input type="date" id="payment-date" name="payment-date">
+    </div>
+    <div>
+        <label for="amount-due">Amount Due:</label>
+        <input type="number" id="amount-due" name="amount-due">
+    </div>
+    <table>
+        <h3>Prescription</h3>
+        <script src="../scripts/prescription_table.js"></script>
+        <tr>
+            <th>Drug Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Expiry Date</th>
+        </tr>
+        <tr>
+            <td contenteditable="true">Ibuprofen</td>
+            <td contenteditable="true">2</td>
+            <td contenteditable="true">$10.00</td>
+            <td contenteditable="true">$20.00</td>
+            <td contenteditable="true">2024-04-01</td>
+        </tr>
+        <tr>
+            <td contenteditable="true">Paracetamol</td>
+            <td contenteditable="true">1</td>
+            <td contenteditable="true">$5.00</td>
+            <td contenteditable="true">$30.00</td>
+			<td contenteditable="true">2025-05-01</td>
+		</tr>
+	</table>  
+	<br>
+	<label for="signature">Signature: </label><input type="text" id="signature" name="signature"><br>
+	<label for="issued-by">Issued By: </label><input type="text" id="issued-by" name="issued-by"><br>
+    <footer>
+        <p>Secure transactions by <span style="color: #0a2351; font-weight: bold; font-size: 1.5em;">HospitalHub-Pay</span></p>
+    </footer>
+</body>
+</html>

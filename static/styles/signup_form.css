@@ -115,3 +115,25 @@ body {
   .footer a:hover {
     text-decoration: underline;
   }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    overflow-y: scroll;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #222;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 20px;
+    border: 3px solid #222;
+  }
