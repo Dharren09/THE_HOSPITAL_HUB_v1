@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Module is entry point to TheHospitalHub API
+Module is entry point into TheHospitalHub API
 """
 
 from flask import Flask, jsonify, make_response
@@ -9,10 +9,10 @@ from flask_cors import CORS
 from flasgger import Swagger
 from flasgger.utils import swag_from
 from models import storage
-from api.version1.views import ui
+from API.version1.routes import bp as api_bp
 
 app = Flask(__name__)
-app.register_blueprint(app_views)
+app.register_blueprint(app_bp)
 CORS(app)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
