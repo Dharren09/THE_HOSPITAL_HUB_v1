@@ -39,10 +39,16 @@ class DBStorage:
         
         if db_env == "test":
             Base.metadata.drop_all(self.__engine)
-    
+        
+        Session = sessionmaker(bind=self.__engine)
+        self.__session = scoped_session(Session)
+        self.reload()
+
     def create(self, obj):
         """ creates and returns a new object """
         self.__session.add(obj)
+        self.__session.commit()
+        return obj
 
     def save(self):
         """ saves to database """
@@ -54,40 +60,39 @@ class DBStorage:
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
-    def get(self, model, obj_id):
-        for key in self.all(model).keys():
-            oid = key.split(".")[1]
-            if obj_id == oid:
-                obj = self.__session.query(__classes[model]).get(oid)
-                return obj
-        return None
+    def get(self, cls, obj_id):
+        try:
+            obj = self.__session.query(self.__classes[cls]).filter_by(id=obj_id).first()
+            if obj is None:
+                raise NoResultFound
+            return obj
+        except NoResultFound:
+            raise KeyError(f"No {obj.__class__.__name__} object with ID {obj_id} found")
 
     def delete(self, obj):
-        self.__session.delete(obj)
-        self.__session.commit()
+        try:
+            self.__session.delete(obj)
+            self.__session.commit()
+        except sqlalchemy.exc.SQLAlchemyError:
+            self.__session.rollback()
+            raise
 
-    def all(self, model=None):
+    def all(self, cls=None):
         """ Return all objects in the storage """
-        if model:
-            objs = {}
-            class_objs = self.__session.query(__classes[model]).all()
-            for obj in class_objs:
-                key = obj.__class__.__name__ + "." + obj.id
-                objs[key] = obj
-            return objs
+        if cls:
+            if cls not in __classes:
+                raise ValueError(f"Class {cls} not found")
+            objs = self.__session.query(__classes[cls]).all()
+        else:
+            objs = []
+            for cls in __classes:
+                objs += self.__session.query(__classes[cls]).all()
+        return objs
 
-        all_objects = {}
 
-        for model in __classes:
-            objs = self.__session.query(__classes[model]).all()
-            for obj in objs:
-                key = obj.__class__.__name__ + "." + obj.id
-                all_objects[key] = obj
-        return all_objects
-
-    def count(self, model=None):
-        if model:
-            return len(self.all(model))
+    def count(self, cls=None):
+        if cls:
+            return len(self.all(cls))
         return len(self.all())
 
     def update(self, key, **kwargs):
@@ -97,8 +102,18 @@ class DBStorage:
                                            ]).filter_by(id=obj_id).first()
         for key, value in kwargs.items():
             setattr(obj, key, value)
-        self.__session.commit()
+        try:
+            self.__session.commit()
+        except Exception as e:
+            self.__session.rollback()
+            raise e
 
     def close(self):
         """Closes transaction"""
-        self.__session.close()
+        try:
+            self.__session.commit()
+        except Exception as e:
+            self.__session.rollback()
+            raise e
+        finally:
+            self.__session.close()

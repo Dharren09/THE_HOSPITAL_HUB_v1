@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 from models.parent_model import ParentModel, Base
 from datetime import datetime, timedelta
-from sqlalchemy import Column, Integer, String, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, Table
 from sqlalchemy.orm import relationship
 import models
 
+if models.storage_ENV == 'db':
+    patient_pharmacy = Table("patients_pharmacy", Base.metadata,
+                         Column("patient_id", String(60), ForeignKey("patients.patient_id", onupdate="CASCADE", ondelete="CASCADE"), primary_key=True),
+                         Column("pharmacy_id", String(60), ForeignKey("pharmacy.id", onupdate="CASCADE", ondelete="CASCADE"), primary_key=True))
 
 class Patient(ParentModel, Base):
     """
@@ -13,7 +17,7 @@ class Patient(ParentModel, Base):
     if models.storage_ENV == 'db':
         __tablename__ = 'patients'
 
-        patient_id = Column(String(60), ForeignKey('patients.id'), autoincrement=True, nullable=False)
+        patient_id = Column(String(60), primary_key=True, autoincrement=True, nullable=False)
         name = Column(String(255), nullable=False)
         age = Column(Integer, nullable=False)
         address = Column(String(255), nullable=True)
@@ -31,33 +35,37 @@ class Patient(ParentModel, Base):
         @classmethod
         def get_patient_bill(cls):
             """Retrieves the bill of a patient"""
-            total_amount = 0
-            items = []
-            for billing in cls.billings:
-                total_amount += billing.amount
-                items.append(billing.to_dict())
+            patient = cls.query.get(patient_id)
+            billings = patient.Billings_and_Invoices
+            total_amount = sum(billing.amount for billing in billings)
+            items = [billing.to_dict() for billing in billings]
             return {"total_amount": total_amount, "items": items}
-        
-        @classmethod
-        def get_schedule(cls, patient_id):
-            """Returns the telehealth schedule of a patient"""
-            now = datetime.utcnow()
-            schedule = []
-            for i in range(7):
-                start_date = now + timedelta(days=i)
-                end_date = start_date + timedelta(days=1)
-                telehealths = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
-                                             start_date, cls.start_time < end_date).all()
-                if telehealths:
-                    schedule.append({"date": start_date.strftime("%Y-%m-%d"), 
-                                     "telehealths": [{"start_time": t.start_time, "provider_name": t.provider.name} 
-                                         for t in telehealths]})
-            return schedule
 
         @classmethod
-        def get_logs(cls, patient_id, start_date, end_date):
-            """Returns the telehealth logs of a patient in a given period"""
-            logs = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= 
-                                      start_date, cls.start_time < end_date).all()
-            return [{"start_time": l.start_time, "duration": l.duration, "provider_name": l.provider.name} 
-                     for l in logs]
+        def get_schedule(cls, patient_id, date):
+            """Returns the telehealth schedule of a patient for a specific date"""
+            start_date = datetime.strptime(date, '%Y-%m-%d')
+            end_date = start_date + timedelta(days=1)
+            telehealths = cls.query.filter(cls.patient_id == patient_id, cls.start_time >= start_date, cls.start_time < end_date).all()
+            schedule = {"date": start_date.strftime("%Y-%m-%d"), "telehealths": []}
+            for t in telehealths:
+                schedule["telehealths"].append({"start_time": t.start_time})
+            return schedule
+            
+        @classmethod
+        def get_logs(log_file, start_date=None, end_date=None):
+            """Get logs from a log file within a specified date range"""
+            logs = []
+            try:
+                with open(log_file, 'r') as f:
+                    for line in f:
+                        log = line.strip()
+                        log_date = datetime.datetime.strptime(log.split(',')[0], '%Y-%m-%d %H:%M:%S')
+                        if start_date and log_date < start_date:
+                            continue
+                        if end_date and log_date > end_date:
+                            continue
+                        logs.append(log)
+            except FileNotFoundError:
+                print(f"Error: Log file '{log_file}' not found")
+            return logs

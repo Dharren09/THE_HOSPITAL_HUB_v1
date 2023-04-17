@@ -11,7 +11,7 @@ from models.TeleHealth import TeleHealth
 class Staff(ParentModel, Base):
     """Represents a staff member"""
     if models.storage_ENV == 'db':
-        __tablename__ = "staffs"
+        __tablename__ = "staff"
 
         name = Column(String(100), nullable=False)
         job_title = Column(String(100), nullable=False)
@@ -27,22 +27,22 @@ class Staff(ParentModel, Base):
 
     if models.storage_ENV != 'db':
         @classmethod
-        def get_by_id(model, self):
+        def get_by_id(cls, id):
             """
             Retrieve a staff member by ID
             """
-            return model.query.filter_by(staff_id=self.id).first()
+            return cls.query.filter_by(staff=id).first()
 
         @classmethod
-        def count(model):
+        def count(cls):
             """
             Count the number of staff members
             """
-            return model.query.count()
+            return cls.query.count()
 
         @classmethod
-        def get_telehealth_activities(self):
+        def get_telehealth_activities(cls, id):
             """
             Retrieve the telehealth activities of this staff member
             """
-            return TeleHealth.query.filter_by(staff_id=self.id).all()
+            return TeleHealth.query.filter_by(staff=id).all()

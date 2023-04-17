@@ -35,4 +35,3 @@ class Pharmacy(ParentModel, Base):
         """Retrieves all information of an individual drug"""
         return {"name": self.name, "batch_number": self.batch_number, "expiry_date": self.expiry_date,
                 "quantity": self.quantity, "price": self.price}
-

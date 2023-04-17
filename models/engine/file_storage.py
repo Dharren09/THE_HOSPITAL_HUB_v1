@@ -33,20 +33,21 @@ class FileStorage:
 
     def reload(self):
         """ Refreshes the storage with the latest state of the file """
-        try:
-            all_objects = []
+        if os.path.isfile(self.__file_path):
+            try:
+                all_objects = []
 
-            with open(self.__file_path, "r") as f:
-                all_objects = json.load(f)
+                with open(self.__file_path, "r") as f:
+                    all_objects = json.load(f)
 
-            for obj in all_objects:
-                key = obj["__class__"] + "." + obj["id"]
-                value = eval(obj["__class__"])(**obj)
-                self.__objects[key] = value
-            return self.__objects
-        except Exception as e:
-            print(e)
-            pass
+                for obj in all_objects:
+                    key = obj["__class__"] + "." + obj["id"]
+                    value = eval(obj["__class__"])(**obj)
+                    self.__objects[key] = value
+                return self.__objects
+            except Exception as e:
+                print(e)
+                pass
 
     def all(self, cls=None):
         """ Returns the dictionary containing all objects of a certain class
@@ -69,11 +70,10 @@ class FileStorage:
 
     def get(self, cls, obj_id):
         """ Retrieve an object by its id """
-        for key in self.all(cls).keys():
-            only_id = key.split(".")[1]
-            if obj_id == only_id:
+        for obj in self.__objects.values():
+            if obj.__class__.__name__ == cls and obj.id == obj_id:
                 # Instantiates the object and then returns it
-                return eval(cls)(**self.__objects[key].to_dict())
+                return obj
         return None
 
     def delete(self, obj):
@@ -88,10 +88,9 @@ class FileStorage:
         try:
             obj_id = obj.__class__.__name__ + "." + obj.id
             if obj_id in self.__objects and kwargs:
-                obj_dict = obj.to_dict()
-                obj_dict.update(**kwargs)
-                obj = eval(obj_dict["__class__"])(**obj_dict)
-                self.create(obj)
-                self.save()
-        except Exception:
+                for key, value in kwargs.items():
+                    setattr(obj, key, value)
+                self.__objects[obj_id] = obj
+            self.save()
+        except:
             pass
