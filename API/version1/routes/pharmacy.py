@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask, Blueprint, render_template, jsonify, make_response, request
+from flask_restful import Api, Resource
 from models import storage, storage_env
 from models.pharmacy import Pharmacy
 from models.parent_model import ParentModel

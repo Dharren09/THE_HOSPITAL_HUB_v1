@@ -3,6 +3,7 @@
 from flask import Flask, Blueprint, abort, jsonify, make_response, request
 from models.parent_model import ParentModel
 from models import storage, storage_env
+from flask_restful import Api, Resource
 from models.patients import Patient
 
 #create blueprint
