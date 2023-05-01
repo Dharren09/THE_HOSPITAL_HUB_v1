@@ -22,11 +22,6 @@ The hospital management system will be a web-based application that will provide
 # Technologies
 The hospital management system will be developed using the following technologies:
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1a1668f2-11dd-4959-a592-1bd231c3afbb/deploy-status)](https://app.netlify.com/sites/thehospitalhubv1/deploys)
-
-# Landing Page
-[Landing Page](https://thehospitalhub.netlify.app/)
-
 1. Python
 2. Flask web framework
 3. MySQL database
@@ -39,6 +34,16 @@ The hospital management system will be developed using the following technologie
 * Week 1: Front-end development, back-end development, and integration testing
 * Week 2: Web app development and user acceptance testing
 * Week 2: Bug fixing, performance optimization and final deployment
+
+# Links
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1a1668f2-11dd-4959-a592-1bd231c3afbb/deploy-status)](https://app.netlify.com/sites/thehospitalhubv1/deploys)
+
+[Landing Page](https://thehospitalhub.netlify.app/)
+
+# Resources
+other delelopers with a similar solution ([Mubarak](https://github.com/vantsmoubaraq) and [Renish](https://github.com/fabrizia2))
+ 
+[Healthbride](https://github.com/vantsmoubaraq/Health_bridge_v1.git)
 
 # Conclusion
 The hospital management system provides an end-to-end solution for managing patient records, staff management, inventory, billing and payments, appointments, and communication with patients. The system will improve the efficiency and accuracy of hospital operations, leading to better patient outcomes and increased revenue for the hospital.
