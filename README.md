@@ -41,9 +41,9 @@ The hospital management system will be developed using the following technologie
 [Landing Page](https://thehospitalhub.netlify.app/)
 
 # Resources
-other delelopers with a similar solution ([Mubarak](https://github.com/vantsmoubaraq) and [Renish](https://github.com/fabrizia2))
+Other delelopers with a similar solution;
  
-[Healthbride](https://github.com/vantsmoubaraq/Health_bridge_v1.git)
+[Healthbridge](https://github.com/vantsmoubaraq/Health_bridge_v1.git) by ([Mubarak](https://github.com/vantsmoubaraq) and [Renish](https://github.com/fabrizia2))
 
 # Conclusion
 The hospital management system provides an end-to-end solution for managing patient records, staff management, inventory, billing and payments, appointments, and communication with patients. The system will improve the efficiency and accuracy of hospital operations, leading to better patient outcomes and increased revenue for the hospital.
