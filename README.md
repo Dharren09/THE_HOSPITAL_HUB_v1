@@ -22,6 +22,8 @@ The hospital management system will be a web-based application that will provide
 # Technologies
 The hospital management system will be developed using the following technologies:
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1a1668f2-11dd-4959-a592-1bd231c3afbb/deploy-status)](https://app.netlify.com/sites/thehospitalhubv1/deploys)
+
 1. Python
 2. Flask web framework
 3. MySQL database
